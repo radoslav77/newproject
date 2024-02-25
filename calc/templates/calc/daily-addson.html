@@ -1,0 +1,58 @@
+{% extends "calc/base.html" %}
+{% block style %}
+<style>
+#form-container{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    height: 50%;
+    margin-left: 15%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+form{
+    width: 80%;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+input{
+    float: right;
+    width: 70%;
+    margin-right: 10%;
+}
+select{
+    float: right;
+    width: 70%;
+    margin-right: 10%;
+}
+
+
+</style>
+{% endblock%}
+
+{% block body %}
+<a href="{% url 'calc:update_daily' %}">Return to Daily</a>
+
+<div id="form-container" class="form-container">
+    <form method="post" action="{% url 'calc:update' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit">Update CSV</button>
+    </form>
+</div>
+<script>
+
+const dateElement = document.getElementByI
+const LableElement = document.getElementsByTagName('lable')
+const TodayDay = document.getElementById('id_date')
+console.log(TodayDay)
+let date = new Date().toLocaleDateString();
+TodayDay.value = date
+
+
+</script>
+
+{% endblock%}

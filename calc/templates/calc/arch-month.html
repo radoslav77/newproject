@@ -1,0 +1,179 @@
+{% extends "calc/base.html" %}
+
+{% block style %}
+<style>
+
+    body{
+        background-color: rgb(240, 231, 221);
+    }
+    .item-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid #000;
+        width: 90%;
+        margin-left: 3%;
+       
+        padding: 10px;
+    }
+    .item-container table{
+        width: 95%;
+    }
+    @media only screen and (max-width: 600px){
+        .item-container{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+               
+                width: 100%;
+                margin-left: 3%;
+            
+                padding: 10px;
+            }
+    .item-container table{
+                width: 60%;
+               
+            }
+    table, th, td{
+        font-size: small;
+       
+    }
+    }
+    .item{
+        display: flex;
+        flex-direction: row;
+       
+        margin: 5px;
+    }
+    label{
+        margin: 0;
+        text-decoration: underline;
+    }
+    .ROW{
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    table, th, td {
+    border: 1px solid black;
+    }
+    td{
+        text-align: center;
+    }
+    p{
+        margin: 5px;
+    }
+    h1{
+        margin-left: 15%;
+    }
+    #total_taly{
+        margin-left: 10%;
+        
+
+    }
+    #taly {
+        text-align: center;
+        column-count: 3;
+        column-gap: 40px;
+    }
+    #total_taly p {
+       font-weight: bolder;
+    }
+
+    .item-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid #000;
+        width: 90%;
+        margin-left: 10%;
+        padding: 10px;
+    }
+    .item{
+        display: flex;
+        flex-direction: row;
+       
+        margin: 5px;
+    }
+    label{
+        margin: 0;
+        text-decoration: underline;
+    }
+    .ROW{
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    table, th, td {
+    border: 1px solid black;
+    }
+    td{
+        text-align: center;
+    }
+    p{
+        margin: 5px;
+    }
+</style>
+{% endblock %}
+
+
+{% block body %}
+
+
+<h1>For the Month of: {{month}}</h1>
+<div class="item-container">
+<table style="width:80%" id="table">
+    <tr>
+      <th>Name</th>
+      <th>Membership</th>
+      <th>Reserved</th>
+      <th>Date of Arrival</th>
+      <th>Amenities</th>
+      <th>Date</th>
+    </tr>
+    {% for d in data %}
+        {% if d.reserved != '0' %}
+            <tr id="lines">
+                <td><p>{{d.today_date}}</p></td>
+                <td >{{d.amenity_code}}</td>
+                <td class="reserved">{{d.reserved}}</td>
+                <td>{{d.arrival_date}}</td>  
+                <td class="amenities">{{d.fruit_amenity}},<br>{{ d.dessert_amenity}},<br>{{d.dessert_amenity1}}</td>  
+                <td>{{d.input_date}}</td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+    <tr>
+      <td>February</td>
+      <td style="text-align:right">$80</td>
+    </tr>
+  </table>
+</div>
+<h1 class="logo"><a href="{% url 'calc:total' month %}">Go to totals</a></h1>
+<script>
+
+  const TotalEl = document.getElementById('total')
+  const ReservedEl = document.getElementsByClassName('reserved')
+  const linesEl = document.getElementsByClassName('lines')
+  const MyTableEl = document.getElementById('table').rows  
+
+for(let i = 0; i < ReservedEl.length; i++){
+    
+
+    if(parseInt(ReservedEl[i].innerText) === 0)
+    //console.log(ReservedEl[i])
+    pass
+    //ReservedEl[i].hidden = true 
+}
+
+
+for (let i = 0; i < MyTableEl.length; i++){
+    //console.log(MyTableEl[i])
+
+}
+
+
+
+//  console.log(MyTableEl.innerText)
+</script>
+
+
+{% endblock %}

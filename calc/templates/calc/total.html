@@ -1,0 +1,176 @@
+{% extends "calc/base.html" %}
+
+{% load static %}
+
+
+{% block style %}
+<style>
+ 
+    body{
+        background-color: rgb(240, 231, 221);
+    }
+    .item-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid #000;
+        width: 90%;
+        margin-left: 10%;
+        padding: 10px;
+    }
+    .item{
+        display: flex;
+        flex-direction: row;
+       
+        margin: 5px;
+    }
+    label{
+        margin: 0;
+        text-decoration: underline;
+    }
+    .ROW{
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    table, th, td {
+    border: 1px solid black;
+    }
+    td{
+        text-align: center;
+    }
+    p{
+        margin: 5px;
+    }
+    h1{
+        margin-left: 15%;
+    }
+    #total_taly{
+        margin-left: 10%;
+        
+
+    }
+    #taly {
+        text-align: center;
+        column-count: 3;
+        column-gap: 40px;
+    }
+    #total_taly p {
+       font-weight: bolder;
+    }
+
+    .item-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        border: 1px solid #000;
+        width: 90%;
+        margin-left: 10%;
+        padding: 10px;
+    }
+    .item{
+        display: flex;
+        flex-direction: row;
+       
+        margin: 5px;
+    }
+    label{
+        margin: 0;
+        text-decoration: underline;
+    }
+    .ROW{
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    table, th, td {
+    border: 1px solid black;
+    }
+    td{
+        text-align: center;
+    }
+    p{
+        margin: 5px;
+    }
+    #total_taly{
+        margin-left: 10%;
+        
+
+    }
+    #taly {
+        text-align: center;
+        column-count: 3;
+        column-gap: 40px;
+    }
+    #total_taly p {
+       font-weight: bolder;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+
+
+<div class="month" >
+  <h2>For Month of <p id="month">{{month}}</p></h2>
+</div>
+
+
+
+
+
+
+
+
+<table style="width:100%">
+    <tr>
+      <th>Name</th>
+      <th>Membership</th>
+      <th>VIP Level</th>
+      <th>Date of Arrival</th>
+      <th>Amenities</th>
+      <th>Date</th>
+    </tr>
+    {% for d in data %}
+    <tr>
+      <td><p>{{d.name}}</p></td>
+      <td >{{d.membership}}</td>
+      <td>{{d.vip_level}}</td>
+      <td>{{d.date}}</td>
+      <td class="amenities">{{d.fruit_amenity}}, {{ d.drink_amenity}}, {{d.dessert_amenity}}</td>
+      <td>{{d.arrival_date}}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        {% if uptodate %}
+        {% for data in uptodate %}
+        <tr>
+          <td><p>{{data.name}}</p></td>
+          <td >{{data.membership}}</td>
+          <td>{{data.vip_level}}</td>
+          <td>{{data.date}}</td>
+          <td class="amenities">{{data.fruit_amenity}}, {{ data.drink_amenity}}, {{d.dessert_amenity}}</td>
+          <td>{{data.arrival_date}}</td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+        <tr>
+      <td>February</td>
+      <td style="text-align:right">$80</td>
+    </tr>
+  </table>
+
+  
+
+  <div class="total">
+    <ul id="total">
+        <li></li>
+    </ul>
+</div>
+
+{% block static %}
+
+<script src="{% static 'js/total.js' %}"></script>
+{% endblock %}
+
+
+
+{% endblock %}

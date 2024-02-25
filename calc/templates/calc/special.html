@@ -1,0 +1,59 @@
+{% extends "calc/base.html" %}
+{% block style %}
+
+<style>
+#form-container{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    height: 50%;
+    margin-left: 15%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+form{
+    width: 80%;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+input{
+    float: right;
+    width: 70%;
+    margin-right: 10%;
+}
+select{
+    float: right;
+    width: 70%;
+    margin-right: 10%;
+}
+#id_arrival_date{
+    width: 70%;
+}
+</style>
+
+{% endblock%}
+
+{% block body %}
+
+<a href="{% url 'calc:update_daily' %}">Return to Daily</a>
+
+<div id="form-container" class="form-container">
+        <form method="post" action="{% url 'calc:special' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Submit</button>
+            
+        </form>
+</div>
+<script>
+    const AmountAmen = document.getElementById('id_amenity_amount')
+    AmountAmen.value = '1'
+   AmountAmen.setAttribute('min', 1) 
+   AmountAmen.setAttribute('max', 100)
+   
+
+
+</script>
+{% endblock%}
