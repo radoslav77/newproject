@@ -22,8 +22,7 @@ let drkWW = 0
 let drkCh = 0
 let drkRW = 0
     const amenitiesEl = document.getElementsByClassName('amenities')
-    const DateToMorrow = document.getElementById('date')
-    const WordsForDays = document.getElementById('words')
+    
    // need to import jason and compare arrival name with amenities 
    // and input it back to page as combined + total  
    var FruitAmenitie = ['Large fruit','Midium fruit','Small fruit','Presidential'] 
@@ -52,7 +51,7 @@ let drkRW = 0
        // data.forEach(e =>{
         //    console.log(e.amenity_code)
        /// })
-       // console.log(data)
+        //console.log(data)
 //working
     arr.forEach(el => {
         //console.log(el)
@@ -95,38 +94,18 @@ let size = size_dict(numCount)
 //console.log (numCount)
         data.forEach(e => {
             
-            /*
-            const DateNomber = e.arrival_date.split(/[/]/)
-            const DateInput = DateToMorrow.innerText.split(/[/]/)
-            var date1 = parseInt(DateNomber[0])+1
-            var date2 = parseInt(DateInput[0])
-            //console.log(date1, '=== ', date2)
-             let con = 0
-            if ( date1 === date2){
-                con++
-               
-                //console.log(parseInt(DateNomber[0]))
-                
-            }
-            if(con > 0){
-                    WordsForDays.innerHTML = 'Day after Arrivals:'
-                } else {
-                WordsForDays.innerHTML = 'Tomorrow arrivals:'
-            }
-            console.log(con)*/
-
             //var date = new Date().toLocaleDateString()
             //var currentDate = date.getFullYear() + '-' + date.getrMonth() + '-' + date.getDate()
             
             //console.log(typeof(e.today_date),' ',e.arrival_date)
-            const d = new Date()
-          
-            //console.log(e.today_date,' ',e.arrival_date, ' ',DateToMorrow.innerText)
-            if (e.arrival_date === DateToMorrow.innerText){
-                
+            
+            //console.log(e.today_date,' ',e.arrival_date)
+            if (e.arrival_date === e.today_date){
+               //console.log(123)
                 if(e.reserved != 0){
-                    //console.log(e.name, '+', e.fruit_amenity, '+', e.arrival_date )
-                    //console.log(e.fruit_amenity, '-', e.dessert_amenity, '-', e.dessert_amenity1)
+                    //console.log(e.reserved)
+                 //console.log(e.name, '+', e.fruit_amenity, '+', e.arrival_date )
+                 //console.log(e.fruit_amenity, '-', e.dessert_amenity)
 
                     numCount.key.type = e.fruit_amenity
                     numCount.key.num= 0
@@ -158,7 +137,7 @@ let size = size_dict(numCount)
                             counR = counR + parseInt(e.reserved)
                         
                         }else if(e.fruit_amenity == 'Chocolate box'){
-                            console.log(123)
+                           // console.log(123)
                             counCH = counCH + numCount.key.num
                             counCH = counCH + parseInt(e.reserved)
                         }
@@ -171,10 +150,9 @@ let size = size_dict(numCount)
                             desDates = desDates + parseInt(e.reserved)
                          }
                     }
-
-
+                
                     for (var key in numCount){
-
+                        //console.log(key, '--', numCount[key])
                         if (e.dessert_amenity == 'Chocolate truffle'){
                             desC = desC + numCount.des.Dnum
                             desC = desC + parseInt(e.reserved)
@@ -182,7 +160,7 @@ let size = size_dict(numCount)
                         }else if(e.dessert_amenity == 'baklava' || e.dessert_amenity1 == 'baklava'){                     
                             desB = desB + numCount.des.Dnum
                             desB = desB + parseInt(e.reserved)
-                            console.log(e)
+                            
                         }else if(e.dessert_amenity == '4 macaroons'){
                             desM = desM + numCount.des.Dnum
                             desM = desM + parseInt(e.reserved)
@@ -231,8 +209,8 @@ let size = size_dict(numCount)
                         }
                     }
 
-                }
 
+                }
                 //console.log(numCount)
             }
             
@@ -241,7 +219,7 @@ let size = size_dict(numCount)
             let newS = coun / coun.length 
 
                 const ulEl = document.getElementById('total')
-                //console.log(size)
+               // console.log(desDates/size)
                 var liEl = document.createElement('li')
                 liEl.innerHTML = `<div id="total_taly">
                                         <div id="taly">
@@ -271,42 +249,21 @@ let size = size_dict(numCount)
 
 
     }
-    let date = new Date().toLocaleDateString();
-    // Date and time function with adding two days 
-    let d = new Date()
-    d.setDate(d.getDate() + 2)
 
-    //console.log(d.toLocaleDateString())
-
-    const BtnLinkEl = document.getElementsByClassName('BtnLinkElement')
-    //console.log(BtnLinkEl)
-    for (let i =0; i < BtnLinkEl.length;i++ ){
-        //console.log(BtnLinkEl[i].innerHTML)
-        if (BtnLinkEl[i].outerText == 'Tomorrow Amenity'){
-            BtnLinkEl[i].href = "{% url 'calc:update_daily' %}"
-            BtnLinkEl[i].innerText = 'Today Amenity'
-        }else if (date === DateToMorrow.innerText){
-            BtnLinkEl[i].href = "{% url 'calc:tomorrow_amenities' %}"
-            BtnLinkEl[i].innerText = 'Tomorrow Amenity'
-        }else if(WordsForDays.innerText == 'Day after arrivals:'){
-                BtnLinkEl[i].href = "{% url 'calc:tomorrow_amenities' %}"
-                BtnLinkEl[i].innerText = 'Tomorrow Amenity'
-          
-           
-        }
-
-    }
 
         //console.log(coun, '-', counM,' ', counL)
-    const LiElments = document.getElementById('total')
-    for(let i = 0; i < LiElments.length; i++){
-        console.log(LiElments[i])
-        if( LiElments[i].innerHTML == 'undefined'){
+    const LiElments = document.getElementById('taly')
+    const pResClass = document.getElementsByClassName('res')
+    //console.log(pResClass)
+    
+
+    for(let i = 0; i < pResClass.length; i++){
+        console.log(123)
+        if( pElement[i].innerText == 'Midium Fruit total : 0'){
             LiElments[i].style.display = 'none'
-        }else if (LiElments[i].innerText == 0){
+        }else if (pElement[i].outerText == 'Midium Fruit total : 0'){
             LiElments[i].style.display = 'none'
         }
     }
-
 
 

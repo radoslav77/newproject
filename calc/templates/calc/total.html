@@ -1,109 +1,9 @@
 {% extends "calc/base.html" %}
-
 {% load static %}
 
 
 {% block style %}
-<style>
- 
-    body{
-        background-color: rgb(240, 231, 221);
-    }
-    .item-container{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        border: 1px solid #000;
-        width: 90%;
-        margin-left: 10%;
-        padding: 10px;
-    }
-    .item{
-        display: flex;
-        flex-direction: row;
-       
-        margin: 5px;
-    }
-    label{
-        margin: 0;
-        text-decoration: underline;
-    }
-    .ROW{
-        margin-left: 5px;
-        margin-right: 5px;
-    }
-    table, th, td {
-    border: 1px solid black;
-    }
-    td{
-        text-align: center;
-    }
-    p{
-        margin: 5px;
-    }
-    h1{
-        margin-left: 15%;
-    }
-    #total_taly{
-        margin-left: 10%;
-        
-
-    }
-    #taly {
-        text-align: center;
-        column-count: 3;
-        column-gap: 40px;
-    }
-    #total_taly p {
-       font-weight: bolder;
-    }
-
-    .item-container{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        border: 1px solid #000;
-        width: 90%;
-        margin-left: 10%;
-        padding: 10px;
-    }
-    .item{
-        display: flex;
-        flex-direction: row;
-       
-        margin: 5px;
-    }
-    label{
-        margin: 0;
-        text-decoration: underline;
-    }
-    .ROW{
-        margin-left: 5px;
-        margin-right: 5px;
-    }
-    table, th, td {
-    border: 1px solid black;
-    }
-    td{
-        text-align: center;
-    }
-    p{
-        margin: 5px;
-    }
-    #total_taly{
-        margin-left: 10%;
-        
-
-    }
-    #taly {
-        text-align: center;
-        column-count: 3;
-        column-gap: 40px;
-    }
-    #total_taly p {
-       font-weight: bolder;
-    }
-</style>
+<link rel="stylesheet" href="/static/style/total.css">
 {% endblock %}
 
 {% block body %}
@@ -166,11 +66,8 @@
     </ul>
 </div>
 
-{% block static %}
 
-<script src="{% static 'js/total.js' %}"></script>
 {% endblock %}
-
-
-
+{% block static %}
+<script src="{% static 'js/total1.js' %}"></script>
 {% endblock %}

@@ -296,17 +296,3 @@ let size = size_dict(numCount)
         }
 
     }
-
-        //console.log(coun, '-', counM,' ', counL)
-    const LiElments = document.getElementById('total')
-    for(let i = 0; i < LiElments.length; i++){
-        console.log(LiElments[i])
-        if( LiElments[i].innerHTML == 'undefined'){
-            LiElments[i].style.display = 'none'
-        }else if (LiElments[i].innerText == 0){
-            LiElments[i].style.display = 'none'
-        }
-    }
-
-
-

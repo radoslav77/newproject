@@ -241,36 +241,39 @@ def code_API(request):
 
 
 def tomorrow_amenities(request):
+    if request.user.is_authenticated:
     
-    
-    entry = Amenities_CSV.objects.all()
-    t = datetime.datetime.now() + timedelta(days=1)
-    day_tomorrow = t.strftime('%d'+'/'+'%m'+'/'+'%Y')
-    Data_for_tomorrow = []
-    
-    for ent in entry:
-        if ent.date == day_tomorrow:
-            for key, item in CODE_AMENITY.items():
-                if ent.amenity_code == key:
-                    #Count = Count + 1
-            #print(ent)
-                    input_date = str(ent.date_of_input)
-                    Data_for_tomorrow.append({
-                    'arrival_date': ent.date,
-                    'day_name': ent.day_of_week,
-                    'amenity_code': ent.amenity_code,
-                    'fruit_amenity': item[0],
-                    'dessert_amenity': item[1],
-                    'dessert_amenity1': item[2],
-                    'iventory': ent.iventory,
-                    'reserved': ent.reserved,
-                    'input_date': input_date,
-                    'today_date': time.strftime('%d'+'/'+'%m'+'/'+'%Y')
-                    })
+        entry = Amenities_CSV.objects.all()
+        t = datetime.datetime.now() + timedelta(days=1)
+        day_tomorrow = t.strftime('%d'+'/'+'%m'+'/'+'%Y')
+        Data_for_tomorrow = []
+        
+        for ent in entry:
+            if ent.date == day_tomorrow:
+                for key, item in CODE_AMENITY.items():
+                    if ent.amenity_code == key:
+                        #Count = Count + 1
+                #print(ent)
+                        input_date = str(ent.date_of_input)
+                        Data_for_tomorrow.append({
+                        'arrival_date': ent.date,
+                        'day_name': ent.day_of_week,
+                        'amenity_code': ent.amenity_code,
+                        'fruit_amenity': item[0],
+                        'dessert_amenity': item[1],
+                        'dessert_amenity1': item[2],
+                        'iventory': ent.iventory,
+                        'reserved': ent.reserved,
+                        'input_date': input_date,
+                        'today_date': time.strftime('%d'+'/'+'%m'+'/'+'%Y')
+                        })
 
-    
-    return render(request, 'calc/tomorrow.html',{'data':Data_for_tomorrow,
-                                              'date': day_tomorrow})
+        
+        return render(request, 'calc/tomorrow.html',{'data':Data_for_tomorrow,
+                                                'date': day_tomorrow})
+    else:
+        return render(request, 'calc/tomorrow.html',{'msg':'Please Log in!!!'})
+
 
 def day_after(request):
     entry = Amenities_CSV.objects.all()

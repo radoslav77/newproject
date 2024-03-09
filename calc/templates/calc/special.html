@@ -1,39 +1,10 @@
 {% extends "calc/base.html" %}
+{% load static %}
+
 {% block style %}
+<link rel="stylesheet" href="/static/style/special.css">
+{% endblock %}
 
-<style>
-#form-container{
-    display: flex;
-    flex-direction: column;
-    width: 60%;
-    height: 50%;
-    margin-left: 15%;
-    align-items: center;
-    justify-content: space-evenly;
-}
-form{
-    width: 80%;
-    height: inherit;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-input{
-    float: right;
-    width: 70%;
-    margin-right: 10%;
-}
-select{
-    float: right;
-    width: 70%;
-    margin-right: 10%;
-}
-#id_arrival_date{
-    width: 70%;
-}
-</style>
-
-{% endblock%}
 
 {% block body %}
 
@@ -47,13 +18,8 @@ select{
             
         </form>
 </div>
-<script>
-    const AmountAmen = document.getElementById('id_amenity_amount')
-    AmountAmen.value = '1'
-   AmountAmen.setAttribute('min', 1) 
-   AmountAmen.setAttribute('max', 100)
-   
 
-
-</script>
 {% endblock%}
+{% block static %}
+<script src="{% static 'js/special.js' %}"></script>
+{% endblock %}

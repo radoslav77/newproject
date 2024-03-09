@@ -1,0 +1,29 @@
+
+#form-container{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    height: 50%;
+    margin-left: 15%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+form{
+    width: 80%;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+input{
+    float: right;
+    width: 70%;
+    margin-right: 10%;
+}
+select{
+    float: right;
+    width: 70%;
+    margin-right: 10%;
+}
+
+
