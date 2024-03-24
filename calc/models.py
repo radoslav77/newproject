@@ -25,7 +25,7 @@ Day_of_week = {
     ('Sunday', 'Sunday')
 }
 Special_Choice = {
-    ('Birthady cake', 'Birthady cake'),
+    ('Birthday cake', 'Birthday cake'),
     ('Aniversary cake', 'Aniversary cake'),
     ('Celebration cake', 'Celebration cake'),
     ('Honeymoon cake', 'Honeymoon cake'),

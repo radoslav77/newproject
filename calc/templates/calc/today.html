@@ -1,6 +1,10 @@
 {% extends "calc/base.html" %}
 {% load static %}
 
+{% block static %}
+<script src="{% static 'js/today.js' %}"></script> 
+{% endblock %}
+
 {% block style %}
 <link rel="stylesheet" href="/static/style/today.css">
 {% endblock %}
@@ -17,7 +21,7 @@
 {% endfor %}
 {% endif %}
     
-    <h1>Todays arrivals: {{today}}</h1>
+    <h1>Todays arrivals: <p id="today_date">{{today}}</p></h1>
 
     <div class="item-container">
        
@@ -31,7 +35,7 @@
     <th>Date</th>
   </tr>
   {% for d in data %}
-  <tr>
+  <tr class="ame">
     {% if d.reserved != '0' %}
         <td><p>{{d.today_date}}</p></td>
         <td >{{d.amenity_code}}</td>
@@ -82,7 +86,4 @@
     </div>
 </div>
 
-{% endblock %}
-{% block static %}
-<script src="{% static 'js/today.js' %}"></script>
 {% endblock %}

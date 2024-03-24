@@ -1,5 +1,5 @@
 from django import forms
-
+from django.forms import DateInput
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import fields
@@ -52,7 +52,7 @@ AMENITY_CODE =[
     ('VIP4', 'VIP4'),
     ('VIP5','VIP5'),
     ('VIP6', 'VIP6'),
-    ('Presidential', 'Presidential')
+    ('VIP6', 'Presidential')
 ]
 
 
@@ -60,7 +60,8 @@ class UpDateDaily(forms.Form):
     #class Meta:
         model = Amenities_CSV
         #fields = ['date', 'day_of_week', 'amenity_code', 'inventory', 'reserved']
-        date = forms.DateField(required=True, widget=forms.DateInput)  
+        date = forms.DateField(required=True, widget=forms.DateInput(format="%d/%m/%Y", attrs={"type": "date"}),
+        input_formats=["%d/%m/%Y"])  
         day_of_week = forms.ChoiceField(required=True,choices=DAY_CHOICES, )
         amenity_code = forms.ChoiceField(required=True,choices=AMENITY_CODE, )
         iventory = forms.IntegerField(initial=100, max_value=100)

@@ -2,8 +2,13 @@
 {% load static %}
 
 
+{% block static %}
+<script src="{% static 'js/tomorrow.js' %}"></script>
+{% endblock %}
+
 {% block style %}
 <link rel="stylesheet" href="/static/style/tomorrow.css">
+<link rel="stylesheet" href="/static/style/today.css">
 {% endblock %}
 
 
@@ -40,6 +45,20 @@
         {% endif %}
     </tr>
     {% endfor %}
+    {% if special %}
+    {% for s in special %}
+    <tr>
+        {% if d.reserved != '0' %}
+            <td>{{s.arrival_date}}</td>
+            <td >{{s.amenity_code}}</td>
+            <td>{{s.reserved}}</td>
+            <td>{{s.arrival_date}}</td>  
+            <td class="amenities">{{s.amenity_type}}</td>  
+            <td>{{s.input_date}}</td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+    {% endif %}
     <tr>
         <td>February</td>
         <td style="text-align:right">$80</td>
@@ -56,12 +75,10 @@
 
     <div class="longstay">
         <div class="card_longsaty">
-            <button class="BtnLink"><a href="{% url 'calc:tomorrow_amenities' %}" class="BtnLinkElement">Tomorrow Amenity</a></button>
+            <button class="BtnLink" id="btnLinkReverse"><a href="{% url 'calc:tomorrow_amenities' %}" class="BtnLinkElement">Tomorrow Amenity</a></button>
+            <button class="BtnLink" ><a href="{% url 'calc:update_daily' %}" class="BtnLinkElement">Today amenities</a></button>
             <button class="BtnLink"><a href="{% url 'calc:day_after' %}" class="BtnLinkElement">Day after Tomorrow</a></button>
         </div>
     </div>
 {% endif %}
-{% endblock %}
-{% block static %}
-<script src="{% static 'js/tomorrow.js' %}"></script>
 {% endblock %}

@@ -15,6 +15,7 @@ import json
 import datetime 
 from datetime import timedelta 
 import datetime as dt
+
 from django.utils.dateparse import parse_date
 from django.templatetags.static import static
 
@@ -211,12 +212,14 @@ def update_daily(request):
 def code_API(request):
     
     JSON_data = []
-
-    for it in ENTRY:
+    entry = Amenities_CSV.objects.all()
+    for it in entry:
+        
         for key, item in CODE_AMENITY.items():
             if it.amenity_code == key:
                
                 input_date = str(it.date_of_input),
+                
                 JSON_data.append({
                     'big_id': it.big_id,
                     'arrival_date': it.date,
@@ -230,7 +233,68 @@ def code_API(request):
                     'input_date': input_date,
                     'today_date': time.strftime('%d'+'/'+'%m'+'/'+'%Y')
                     })
+ 
 
+   
+    special_entry = Spacial_Amenities.objects.all()
+    for sp in special_entry:
+
+          
+        date_of_input = sp.arrival_date.strftime('%d'+'/'+'%m'+'/'+'%Y')
+        #print(date_of_input)
+        JSON_data.append({
+                'big_id': sp.big_id,
+                'arrival_date': date_of_input,
+                'day_name': it.day_of_week,
+                'amenity_code': it.amenity_code,
+                'fruit_amenity': sp.amenity_type,
+                'dessert_amenity':'',
+                'dessert_amenity1': '',
+                'iventory': '100',
+                'reserved': sp.amenity_amount,
+                'input_date': date_of_input,
+                'today_date': time.strftime('%d'+'/'+'%m'+'/'+'%Y'),
+
+        })
+        
+    '''           
+    data =[]            
+    special_entry = Spacial_Amenities.objects.all()
+    for sp_it in special_entry:
+        for key, item in CODE_AMENITY.items():
+            date_input = str(it.date_of_input)
+            if sp_it.amenity_code == key:
+                
+                data.append({
+                    'big_id': sp_it.big_id,
+                    'arrival_date': sp_it.arrival_date,
+                    'day_name': sp_it.day_of_week,
+                    'amenity_code': sp_it.amenity_code,
+                    'fruit_amenity': item[0],
+                    'dessert_amenity': item[1],
+                    'dessert_amenity1': item[2],
+                    'iventory': '100',
+                    'reserved': sp_it.amenity_amount,
+                    'input_date': date_input,
+                    'today_date': time.strftime('%d'+'/'+'%m'+'/'+'%Y')
+                    })
+            else:
+                data.append({
+                    'big_id': sp_it.big_id,
+                    'arrival_date': sp_it.arrival_date,
+                    'day_name': sp_it.day_of_week,
+                    'amenity_code': sp_it.amenity_code,
+                    'fruit_amenity': '',
+                    'dessert_amenity': sp_it.amenity_type,
+                    'dessert_amenity1': '',
+                    'iventory': '100',
+                    'reserved': sp_it.amenity_amount,
+                    'input_date': date_input,
+                    'today_date': time.strftime('%d'+'/'+'%m'+'/'+'%Y')
+                    })
+    ''' 
+    #print(data[-3])
+    #print(JSON_data[-1])
                 #print(123)
                 # if that is the key take this input an dgo update the filds with Fruit and dessert
                 #print(key, '-', item)
@@ -267,9 +331,15 @@ def tomorrow_amenities(request):
                         'input_date': input_date,
                         'today_date': time.strftime('%d'+'/'+'%m'+'/'+'%Y')
                         })
-
+        special_data = []
+        special_entry = Spacial_Amenities.objects.all()
+        for s in special_entry:
+            s_date = s.arrival_date.strftime('%d'+'/''%m'+'/'+'%Y')
+            if s_date == day_tomorrow:
+                special_data.append(s)
         
         return render(request, 'calc/tomorrow.html',{'data':Data_for_tomorrow,
+                                                     'special': special_data,
                                                 'date': day_tomorrow})
     else:
         return render(request, 'calc/tomorrow.html',{'msg':'Please Log in!!!'})
@@ -301,8 +371,14 @@ def day_after(request):
                     'today_date': time.strftime('%d'+'/'+'%m'+'/'+'%Y')
                     })
 
-
+    special_data = []
+    special_entry = Spacial_Amenities.objects.all()
+    for s in special_entry:
+        s_date = s.arrival_date.strftime('%d'+'/''%m'+'/'+'%Y')
+        if s_date == day_after:
+            special_data.append(s)
     return render(request, 'calc/tomorrow.html',{'data':Data_for_tomorrow,
+                                                 'special': special_data,
                                               'date': day_after,
                                               'date1': 'Day after arrivals:'})
 
@@ -326,16 +402,19 @@ def special(request):
 
 
 def update(request):
-
+    from datetime import datetime
     if request.method == 'POST':
         
-        date = request.POST['date']
+        date1 = request.POST['date']
+        datetime_obj = datetime.strptime(date1, '%Y-%m-%d')
+        date2 = datetime_obj.strftime('%d'+'/'+'%m'+'/'+'%Y')
+        #print(date2)
         day = request.POST['day_of_week']
         code = request.POST['amenity_code']
        #inventory = request.POST['inventory']
         reserved = request.POST['reserved']
         
-        data = Amenities_CSV(date=date,day_of_week=day,
+        data = Amenities_CSV(date=date2,day_of_week=day,
                              amenity_code=code,iventory=100,
                              reserved=reserved,date_of_input=today)
         data.save()
@@ -436,6 +515,24 @@ def delete_media(request,id):
         return redirect('calc:index')
 
 def total(request, month):
+
+
+
+
+    data_repl =[]
+    repl = Replenishment.objects.all()
+    for i in repl:
+        monEntry = i.date_of_input.strftime('%B')
+        if month == monEntry:
+            data_repl.append({
+                'name': i.amenity_replen,
+                'number': i.amount_day,
+                'cost': format(3.20, '.2f'),
+                'price':format((i.amount_day * 3.20), '.2f')
+            })
+            #print(monEntry)
+        
+    '''
     new_data = []
     cont = 0
     cont1 = 0
@@ -485,20 +582,39 @@ def total(request, month):
                     new_data.remove(i)
                     cont1 = cont1 + 1
     total_data = []
-
+    res = 0
+    res1 = 0
+    res2 = 0
     for entry in new_data:
-        for k, it in entry.items():
+        #print(entry['reserved'])
             
-            if it == 'Small fruit bowl':
+        if entry['fruit_amenity'] == 'Small fruit bowl':
+                res = res + int(entry['reserved'])
                 total_data.append({
-                    'small fruit': '',
-                    'mid fruit':''
+                    'Small fruit bowl': res,
+                    
                 })
-                #print(entry.reserved)
+        elif entry['fruit_amenity'] == 'Medium fruit bowl':
+           
+            res1 = res1 + int(entry['reserved'])
+            total_data.append({
+                    'Medium fruit bowl': res1,
+                    
+                })
+        elif entry['fruit_amenity'] == 'Large fruit bowl':
+            res2 = res2 + int(entry['reserved'])
+            total_data.append({
+                    'Large fruit bowl': res2,
+                    
+                })
+
+   '''
 
 
     return render(request, 'calc/total.html',{
-        'month': month
+        'month': month,
+        'dataRepl': data_repl,
+        
     })
 
 

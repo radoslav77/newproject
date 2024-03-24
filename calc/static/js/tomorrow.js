@@ -21,6 +21,17 @@ let drkN = 0
 let drkWW = 0
 let drkCh = 0
 let drkRW = 0
+let HoneyCk = 0
+let AniverCk = 0
+let BirthCk = 0
+let CelebCk = 0
+let SixInch = 0
+let EightInch = 0
+let Canap = 0
+let SliceFruit = 0
+let SpecialAM =0
+
+
     const amenitiesEl = document.getElementsByClassName('amenities')
     const DateToMorrow = document.getElementById('date')
     const WordsForDays = document.getElementById('words')
@@ -158,9 +169,37 @@ let size = size_dict(numCount)
                             counR = counR + parseInt(e.reserved)
                         
                         }else if(e.fruit_amenity == 'Chocolate box'){
-                            console.log(123)
+                            //console.log(123)
                             counCH = counCH + numCount.key.num
                             counCH = counCH + parseInt(e.reserved)
+                        }else if (e.fruit_amenity == 'Birthday cake'){
+                            
+                            BirthCk = BirthCk + numCount.key.num
+                            BirthCk = BirthCk + parseInt(e.reserved)
+                        }else if (e.fruit_amenity == '6" cake'){
+                            SixInch = SixInch + numCount.key.num
+                            SixInch = SixInch + parseInt(e.reserved)
+                        }else if (e.fruit_amenity == 'Aniversary cake'){
+                            AniverCk = AniverCk + numCount.key.num
+                            AniverCk = AniverCk + parseInt(e.reserved)
+                        }else if (e.fruit_amenity == 'Honeymoon cake'){
+                            HoneyCk =  HoneyCk + numCount.key.num
+                            HoneyCk = HoneyCk + parseInt(e.reserved)
+                        }else if (e.fruit_amenity == 'Celebration cake'){
+                            CelebCk = CelebCk + numCount.key.num
+                            CelebCk = CelebCk + parseInt(e.reserved)
+                        }else if (e.fruit_amenity == '8" cake'){
+                            EightInch = EightInch + numCount.key.num
+                            EightInch = EightInch + parseInt(e.reserved)
+                        }else if (e.fruit_amenity == 'Canapes'){
+                            Canap = Canap + numCount.key.num
+                            Canap = Canap + parseInt(e.reserved)
+                        }else if ( e.fruit_amenity == 'Sliced fruit platter'){
+                            SliceFruit = SliceFruit + numCount.key.num
+                            SliceFruit = SliceFruit +parseInt(e.reserved)
+                        }else if (e.fruit_amenity == 'Special amenities'){
+                            SpecialAM = SpecialAM + numCount.key.num
+                            SpecialAM = SpecialAM + parseInt(e.reserved)
                         }
                             
                     }
@@ -182,7 +221,7 @@ let size = size_dict(numCount)
                         }else if(e.dessert_amenity == 'baklava' || e.dessert_amenity1 == 'baklava'){                     
                             desB = desB + numCount.des.Dnum
                             desB = desB + parseInt(e.reserved)
-                            console.log(e)
+                            //console.log(e)
                         }else if(e.dessert_amenity == '4 macaroons'){
                             desM = desM + numCount.des.Dnum
                             desM = desM + parseInt(e.reserved)
@@ -242,7 +281,7 @@ let size = size_dict(numCount)
 
                 const ulEl = document.getElementById('total')
                 //console.log(size)
-                var liEl = document.createElement('li')
+               /* var liEl = document.createElement('li')
                 liEl.innerHTML = `<div id="total_taly">
                                         <div id="taly">
                                         <p class=res>Small Fruit total : ${ coun / size }</p>
@@ -262,13 +301,68 @@ let size = size_dict(numCount)
                                         <p class=res>White Wine total: ${drkWW / size  }</p>
                                         <p class=res>Champadne total: ${drkCh / size  }</p>
                                         <p class=res>Red Wine total: ${drkRW / size  }</p>
+                                        <p class=res>Honeymoon Cake: ${HoneyCk / size  }</p>
+                                        <p class=res>Birthday Cake: ${BirthCk / size  }</p>
+                                        <p class=res>Aniversary Cake: ${AniverCk / size  }</p>
+                                        <p class=res>Celebration cake: ${CelebCk / size  }</p>
+                                        <p class=res> 6" Cake: ${SixInch / size  }</p>
+                                        <p class=res> 8" Cake: ${EightInch / size  }</p>
+                                        <p class=res> Canapes: ${Canap / size  }</p>
+                                        <p class=res>Sliced fruit platter: ${SliceFruit / size  }</p>
+                                        <p class=res>Special amenities: ${SpecialAM / size  }</p>
                                         </div>
                                     </div>`
                 
                                   
-                ulEl.appendChild(liEl)
+                ulEl.appendChild(liEl)*/
 
-
+                const NewArrOfEl = {
+                    'Small Fruit total' :` ${ coun / size }`,
+                    'Midium Fruit total' :` ${counM / size  }`,
+                    'Large Fruit total' : `${counL / size  }`,
+                    'Presidential Fruit' :` ${counR / size  }`,
+                    'Custom Amenities' : `${CustomChoice / size  }`,
+                    'Florentine ': `${floren / size  }`,
+                    'Arabic Golden Box' : `${desGold / size  }`,
+                    'Baklava total' : `${desB / size  }`,
+                    'Macaroons 4pcs total': `${desM / size  }`,
+                    'Macaroons 6pcs total': `${desM6 / size  }`,
+                   ' Macaroons 8pcs total': `${desM8 / size  }`,
+                    'Chocolate box': `${counCH / size  }`,
+                    'Dates': `${desDates / size  }`,
+                    'Negroni total': `${drkN / size  }`,
+                    'White Wine total': `${drkWW / size  }`,
+                    'Champadne total': `${drkCh / size  }`,
+                    'Red Wine total': `${drkRW / size  }`,
+                    'Honeymoon Cake': `${HoneyCk / size  }`,
+                    'Birthday Cake': `${BirthCk / size  }`,
+                    'Aniversary Cake': `${AniverCk / size  }`,
+                    'Celebration cake': `${CelebCk / size  }`,
+                    '6" Cake': `${SixInch / size  }`,
+                    '8" Cake': `${EightInch / size  }`,
+                    'Canapes':` ${Canap / size  }`,
+                    'Sliced fruit platter': `${SliceFruit / size  }`,
+                    'Special amenities': `${SpecialAM / size  }`,
+                }
+        
+                for (var key in NewArrOfEl){
+                console.log(NewArrOfEl[key])
+                //console.log(NewArrOfEl)
+            
+            }
+            for (const[key, value] of Object.entries(NewArrOfEl) ){
+                if (value != 0){
+                    var liEl = document.createElement('li')
+                    liEl.innerHTML = `<div id="total_taly">
+                                            <div id="taly">
+                                            <p class=res>${key} : ${value}</p>
+                                            </div>
+                                        </div>`
+                    
+                    ulEl.appendChild(liEl)                    
+                }
+                console.log(key, value)
+            }
 
     }
     let date = new Date().toLocaleDateString();
@@ -283,8 +377,9 @@ let size = size_dict(numCount)
     for (let i =0; i < BtnLinkEl.length;i++ ){
         //console.log(BtnLinkEl[i].innerHTML)
         if (BtnLinkEl[i].outerText == 'Tomorrow Amenity'){
-            BtnLinkEl[i].href = "{% url 'calc:update_daily' %}"
-            BtnLinkEl[i].innerText = 'Today Amenity'
+            const TomBtn = document.getElementById('btnLinkReverse')
+            TomBtn.style.display = 'none'
+            
         }else if (date === DateToMorrow.innerText){
             BtnLinkEl[i].href = "{% url 'calc:tomorrow_amenities' %}"
             BtnLinkEl[i].innerText = 'Tomorrow Amenity'

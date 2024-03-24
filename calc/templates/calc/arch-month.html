@@ -3,6 +3,7 @@
 
 {% block style %}
 <link rel="stylesheet" href="/static/style/arch-month.css">
+
 {% endblock %}
 
 
@@ -11,6 +12,7 @@
 
 <h1>For the Month of: {{month}}</h1>
 <div class="item-container">
+  <h2 class="goTotals"><a class="goTotals" href="{% url 'calc:total' month %}">Go to totals</a></h2>
 <table style="width:80%" id="table">
     <tr>
       <th>Name</th>
@@ -37,8 +39,9 @@
       <td style="text-align:right">$80</td>
     </tr>
   </table>
+  <h2 class="goTotals"><a class="goTotals" href="{% url 'calc:total' month %}">Go to totals</a></h2>
+
 </div>
-<h1 class="logo"><a href="{% url 'calc:total' month %}">Go to totals</a></h1>
 
 {% endblock %}
 {% block static %}

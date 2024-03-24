@@ -1,47 +1,43 @@
 
 
 const JSON_data = ('/code_API')
-    console.log(JSON_data)
+    //console.log(JSON_data)
     GetData(JSON_data)
     
     async function GetData(url) {
         const res = await fetch(url)
         const data = await res.json()
-        console.log(data)
+        //console.log(data)
     }
 
 
-    const BtnEl = document.getElementById('btn1')
+   
     const formData = document.getElementById('form')
     const NewForm = new FormData(formData)
     const labelEls = document.getElementsByTagName("label")
     const inputEls = document.getElementsByTagName("input")
     const choiceEls = document.getElementsByTagName("select")
     const pEls = document.getElementsByTagName('p')
-    const MonthEl = document.getElementById('id_month')
+   
     const FormEl = document.getElementsByTagName('form')
-    console.log(FormEl)
+
+  
 
     
     const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
     const m = new Date()
     let currant_m = month[m.getMonth()]
-    console.log(currant_m)
+    //console.log(currant_m)
 
 
-console.log(pEls)
+//console.log(pEls)
     const output = document.getElementById('output');
 
-    BtnEl.addEventListener("click", ()=>  {
-        //console.log(123)
-        for (const [key, value] of NewForm) {
-        output.textContent += `${key}: ${value}\n`;
-        }
-    })
+
 
    for (let l = 0; l < labelEls.length; l++){
-     //console.log(labelEls[l].innerHTML)
-     if(labelEls[l].innerHTML == "Num of fruit:" || labelEls[l].innerHTML == "Num of drink:" || labelEls[l].innerHTML == "Num of dessert:" ){
+     console.log(labelEls[l].innerHTML)
+     if(labelEls[l].innerHTML == "File:" || labelEls[l].innerHTML == "Num of drink:" || labelEls[l].innerHTML == "Num of dessert:" ){
         labelEls[l].style.display = "none"
      }
    }
@@ -87,7 +83,4 @@ console.log(pEls)
 
 
 
-
-MonthEl.value = currant_m
-//MonthEl.disabled = true     
 

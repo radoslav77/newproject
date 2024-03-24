@@ -1,6 +1,6 @@
 
     body{
-        background-color: rgb(240, 231, 221);
+        background-color:  #0d1117;
     }
     .item-container{
         display: flex;
@@ -54,17 +54,26 @@
         margin-right: 5px;
     }
     table, th, td {
-    border: 1px solid black;
-    }
-    td{
-        text-align: center;
-    }
-    p{
-        margin: 5px;
-    }
-    h1{
-        margin-left: 15%;
-    }
+        border: 1px solid rgb(125, 170, 196);
+        }
+        td{
+            color: #fff;
+            text-align: center;
+        }
+        p{
+            color: #fff;
+            margin: 5px;
+        }
+        th{
+            color: rgb(125,170,196);
+        }
+        h1{
+            margin-left: 15%;
+            color: #60b1b4;
+        }
+        h5{
+            color: #60b1b4;
+        }
     #total_taly{
         margin-left: 10%;
         

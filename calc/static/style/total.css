@@ -95,3 +95,38 @@ p{
 #total_taly p {
    font-weight: bolder;
 }
+.month{
+    display: flex;
+    flex-direction: row;
+}
+.item-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #000;
+    width: 90%;
+    margin-left: 3%;
+   
+    padding: 10px;
+}
+
+@media only screen and (max-width: 600px){
+    .item-container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+           
+            width: 100%;
+            margin-left: 3%;
+        
+            padding: 10px;
+        }
+.item-container table{
+            width: 60%;
+           
+        }
+table, th, td{
+    font-size: small;
+   
+}
+}
