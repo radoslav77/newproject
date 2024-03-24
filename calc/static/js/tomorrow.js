@@ -346,7 +346,7 @@ let size = size_dict(numCount)
                 }
         
                 for (var key in NewArrOfEl){
-                console.log(NewArrOfEl[key])
+                //console.log(NewArrOfEl[key])
                 //console.log(NewArrOfEl)
             
             }
@@ -361,7 +361,7 @@ let size = size_dict(numCount)
                     
                     ulEl.appendChild(liEl)                    
                 }
-                console.log(key, value)
+                //console.log(key, value)
             }
 
     }
@@ -378,18 +378,22 @@ let size = size_dict(numCount)
         //console.log(BtnLinkEl[i].innerHTML)
         if (BtnLinkEl[i].outerText == 'Tomorrow Amenity'){
             const TomBtn = document.getElementById('btnLinkReverse')
+            //console.log(d.toLocaleDateString(), '=', DateToMorrow.innerText)
             TomBtn.style.display = 'none'
             
-        }else if (date === DateToMorrow.innerText){
-            BtnLinkEl[i].href = "{% url 'calc:tomorrow_amenities' %}"
-            BtnLinkEl[i].innerText = 'Tomorrow Amenity'
-        }else if(WordsForDays.innerText == 'Day after arrivals:'){
+        if (d.toLocaleDateString() == DateToMorrow.innerText ){
+            
+            BtnLinkEl[i].href = "{% url 'calc:update_daily' %}"
+            BtnLinkEl[i].innerText = 'Today Amenity'
+             
+            if(WordsForDays.innerHTML == 'Day after arrivals: '){
+               //console.log(WordsForDays.innerHTML)
                 BtnLinkEl[i].href = "{% url 'calc:tomorrow_amenities' %}"
                 BtnLinkEl[i].innerText = 'Tomorrow Amenity'
           
-           
+         }   
         }
-
+     }
     }
 
         //console.log(coun, '-', counM,' ', counL)

@@ -8,7 +8,9 @@
 
 {% block body %}
 
-<a href="{% url 'calc:update_daily' %}">Return to Daily</a>
+<div class="LinkToDay">
+    <a href="{% url 'calc:update_daily' %}">Return to Daily</a>
+</div>
 
 <div id="form-container" class="form-container">
         <form method="post" action="{% url 'calc:special' %}" enctype="multipart/form-data">

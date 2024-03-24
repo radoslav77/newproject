@@ -15,6 +15,7 @@ import json
 import datetime 
 from datetime import timedelta 
 import datetime as dt
+from .login import *
 
 from django.utils.dateparse import parse_date
 from django.templatetags.static import static
@@ -63,28 +64,30 @@ CODE_AMENITY = {
 
 # input of csdv file + spacial amenities
 def index(request):
-    if request.user.is_authenticated:
-        user = request.user.username
-      
-        #print(time.strftime('%A'))
-        #delete all entry of csv file model
-        if request.method == 'POST':
-        # name = request.POST['day']
-            day_name = time.strftime('%A')
-            amound = request.POST['amount']
-            for k, v in TURN_DOWN.items():
-                if day_name == k:
-                    
-                    data = Replenishment(amenity_replen=v,amount_day=amound,date_of_input=today)
-                    data.save()
-                    print(v)
-
-        return render(request, 'calc/index.html', {
-            'form': InputData(),
-            'form1' : CSVFileForm(),
-            'user':user
-        })
     
+    if request.user.is_authenticated:
+       
+            user = request.user.username
+            
+            #print(time.strftime('%A'))
+            #delete all entry of csv file model
+            if request.method == 'POST':
+            # name = request.POST['day']
+                day_name = time.strftime('%A')
+                amound = request.POST['amount']
+                for k, v in TURN_DOWN.items():
+                    if day_name == k:
+                        
+                        data = Replenishment(amenity_replen=v,amount_day=amound,date_of_input=today)
+                        data.save()
+                        print(v)
+
+            return render(request, 'calc/index.html', {
+                'form': InputData(),
+                'form1' : CSVFileForm(),
+                'user':user
+            })
+
     else:
         return render(request, 'calc/index.html', {
             'msg': 'You need to login!!!',

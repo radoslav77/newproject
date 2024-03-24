@@ -1,5 +1,6 @@
 {% extends "calc/base.html" %}
 {% load static %}
+{% load auth_extras %}
 
 {% block style %}
 <link rel="stylesheet" href="/static/style/index.css">
@@ -31,6 +32,7 @@ body{
     <button class="btnLink"><a href="{% url 'calc:tomorrow_amenities' %}"><h6>Tomorrow Amenitie</h6></a></button>
     <button class="btnLink"><a href="{% url 'calc:day_after' %}"><h6>Day After Amenitie</h6></a></button>
 </div>
+{% if request.user|has_group:"grm"  or request.user|has_group:"admin"%}
 <div class="holder">
     <div class="form-container" >
         <form id="upload" method="post" action="{% url 'calc:upload_csv' %}" enctype="multipart/form-data">
@@ -53,7 +55,7 @@ body{
         </div>
     </div>
 </div>
-
+{% endif %}
 <output id="output"></output>
 <div class="archive" id="archive">
     <li><a href="{% url 'calc:month' 'January' %}">January</a></li>

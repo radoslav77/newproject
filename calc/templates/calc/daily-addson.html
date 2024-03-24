@@ -7,14 +7,17 @@
 {% endblock %}
 
 {% block body %}
-<a href="{% url 'calc:update_daily' %}">Return to Daily</a>
+<div class="LinkToDay">
+    <a href="{% url 'calc:update_daily' %}">Return to Daily</a>
+</div>
+
 
 <div id="form-container" class="form-container">
     <form method="post" action="{% url 'calc:update' %}" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
 
-        <button type="submit">Update CSV</button>
+        <button type="submit">Submit</button>
     </form>
 </div>
 {% endblock%}
